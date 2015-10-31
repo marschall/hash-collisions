@@ -13,31 +13,12 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.results.format.ResultFormatType;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import com.gs.collections.impl.factory.Sets;
 
-//@BenchmarkMode(Mode.AverageTime)
 @BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 public class AddCollisionBenchmark {
-
-  public static void main(String[] args) throws RunnerException {
-    Options options = new OptionsBuilder()
-      .include(".*AddCollisionBenchmark.*")
-      .warmupIterations(10)
-      .measurementIterations(10)
-      .resultFormat(ResultFormatType.TEXT)
-//      .jvmArgsPrepend("-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder")
-      .build();
-
-    new Runner(options).run();
-//    System.out.println(options.getResult().get());
-  }
 
   @State(Scope.Benchmark)
   public static class SetState {
