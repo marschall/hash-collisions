@@ -89,6 +89,26 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>com.github.ferstl</groupId>
+        <artifactId>jitwatch-jarscan-maven-plugin</artifactId>
+        <configuration>
+          <reportFile>target/jarscan-report</reportFile>
+          <analyzeDependencies>true</analyzeDependencies>
+          <includes>
+            <iclude>com.goldmansachs:gs-collections-api</iclude>
+            <iclude>com.goldmansachs:gs-collections</iclude>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>crate-jarscan-report</id>
+            <goals>
+              <goal>scan</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
@@ -180,6 +200,11 @@
         <plugin>
           <artifactId>maven-scm-plugin</artifactId>
           <version>1.9.2</version>
+        </plugin>
+        <plugin>
+          <groupId>com.github.ferstl</groupId>
+          <artifactId>jitwatch-jarscan-maven-plugin</artifactId>
+          <version>1.0.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
