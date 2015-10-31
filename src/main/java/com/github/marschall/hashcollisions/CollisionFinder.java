@@ -16,7 +16,7 @@ public class CollisionFinder {
   // https://github.com/emboss/schadcode
 
   public static void main(String[] args) {
-    //findByCountOnly();
+//    findByCountOnly();
     findByhashCode(1216347);
 //    System.out.printf("%04H%n", 127);
   }
@@ -40,15 +40,18 @@ public class CollisionFinder {
   private static void findByhashCode(int hashCode) {
 
     MutableSet<String> collisions = Sets.mutable.empty();
-    for (int i = 0; i < Character.MAX_VALUE; i++) {
-      for (int j = 0; j < Character.MAX_VALUE; j++) {
-        String string = new String(new char[]{(char) i, (char) j});
-        if (string.hashCode() == hashCode) {
-          collisions.add(string);
+    for (char i = 0; i < Character.MAX_VALUE; i++) {
+      if (!Character.isSurrogate(i)) {
+        for (char j = 0; j < Character.MAX_VALUE; j++) {
+          if (!Character.isSurrogate(j)) {
+            String string = new String(new char[]{(char) i, (char) j});
+            if (string.hashCode() == hashCode) {
+              collisions.add(string);
+            }
+          }
+
         }
-
       }
-
     }
 
     System.out.println(collisions.size());
@@ -60,14 +63,17 @@ public class CollisionFinder {
   private static void findByCountOnly() {
     MutableIntIntMap counts = IntIntMaps.mutable.empty();
     //IntStream chars = IntStream.rangeClosed(0, Character.MAX_VALUE);
-    for (int i = 0; i < Character.MAX_VALUE; i++) {
-      for (int j = 0; j < Character.MAX_VALUE; j++) {
-        String string = new String(new char[]{(char) i, (char) j});
-        int key = string.hashCode();
-        int count = counts.getIfAbsent(key, 0);
-        counts.put(key, count + 1);
+    for (char i = 0; i < Character.MAX_VALUE; i++) {
+      if (!Character.isSurrogate(i)) {
+        for (char j = 0; j < Character.MAX_VALUE; j++) {
+          if (!Character.isSurrogate(j)) {
+            String string = new String(new char[]{(char) i, (char) j});
+            int key = string.hashCode();
+            int count = counts.getIfAbsent(key, 0);
+            counts.put(key, count + 1);
+          }
+        }
       }
-
     }
 
     int maxCount = 0;

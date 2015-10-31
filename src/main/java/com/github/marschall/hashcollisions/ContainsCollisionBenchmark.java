@@ -12,21 +12,19 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.annotations.State;
 
 import com.gs.collections.impl.factory.Sets;
 
-//@BenchmarkMode(Mode.AverageTime)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class AddCollisionBenchmark {
+public class ContainsCollisionBenchmark {
 
-  // 2049
   private static final String[] COLLISIONS = new String[] {
       "\u9103\u9103",
       "\u9104\u9104",
@@ -2081,7 +2079,7 @@ public class AddCollisionBenchmark {
 
   public static void main(String[] args) throws RunnerException {
     Options options = new OptionsBuilder()
-      .include(".*AddCollisionBenchmark.*")
+      .include(".*ContainsCollisionBenchmark.*")
       .warmupIterations(10)
       .measurementIterations(10)
       .resultFormat(ResultFormatType.TEXT)
@@ -2092,48 +2090,43 @@ public class AddCollisionBenchmark {
 //    System.out.println(options.getResult().get());
   }
 
+
   @State(Scope.Benchmark)
   public static class SetState {
-    List<String> collisionList;
+    Set<String> gsSet;
+    Set<String> jcfSet;
+    String first;
+    String last;
+
 
     @Setup
     public void setUp() {
-      this.collisionList = Arrays.asList(COLLISIONS);
+      List<String> collisionList = Arrays.asList(COLLISIONS);
+      this.gsSet = Sets.mutable.with(COLLISIONS);
+      this.jcfSet = new HashSet<>(collisionList);
+      this.first = COLLISIONS[0];
+      this.last = COLLISIONS[COLLISIONS.length - 1];
     }
-
-  }
-
-
-  @Benchmark
-  public Set<Object> addJcf() {
-    Set<Object> set = new HashSet<>();
-    for (String string : COLLISIONS) {
-      set.add(string);
-    }
-    return set;
   }
 
   @Benchmark
-  public Set<Object> addAllJcf(SetState state) {
-    Set<Object> set = new HashSet<>();
-    set.addAll(state.collisionList);
-    return set;
+  public boolean containsFirstJcf(SetState state) {
+    return state.jcfSet.contains(state.first);
   }
 
   @Benchmark
-  public Set<Object> addGs() {
-    Set<Object> set = Sets.mutable.empty();
-    for (String string : COLLISIONS) {
-      set.add(string);
-    }
-    return set;
+  public boolean containsLastJcf(SetState state) {
+    return state.jcfSet.contains(state.last);
   }
 
   @Benchmark
-  public Set<Object> addAllGs(SetState state) {
-    Set<Object> set = Sets.mutable.empty();
-    set.addAll(state.collisionList);
-    return set;
+  public boolean containsFirstGs(SetState state) {
+    return state.gsSet.contains(state.first);
+  }
+
+  @Benchmark
+  public boolean containsLastGs(SetState state) {
+    return state.gsSet.contains(state.last);
   }
 
 }
