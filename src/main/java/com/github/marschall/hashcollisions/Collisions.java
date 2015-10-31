@@ -9,8 +9,8 @@ public class Collisions {
     System.out.println(s2.hashCode());
     System.out.println((s1 + s2).hashCode());
     System.out.println((s2 + s1).hashCode());
-
     System.out.println((int) s1.charAt(0));
+
   }
 
   // 2048

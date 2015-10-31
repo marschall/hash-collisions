@@ -13,7 +13,6 @@ import com.gs.collections.impl.factory.primitive.IntIntMaps;
 import com.gs.collections.impl.factory.primitive.IntObjectMaps;
 
 public class CollisionFinder {
-  // https://github.com/emboss/schadcode
 
   public static void main(String[] args) {
 //    findByCountOnly3();

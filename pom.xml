@@ -8,8 +8,8 @@
   <version>1.0.0-SNAPSHOT</version>
   <inceptionYear>2015</inceptionYear>
   <url>https://github.com/marschall/hash-collisions</url>
-  <name>Spring WS Example</name>
-  <description>Hash collistions</description>
+  <name>Hash Collisions</name>
+  <description>Hash collision examples and benchmarks</description>
   <packaging>jar</packaging>
 
   <prerequisites>
