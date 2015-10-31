@@ -45,7 +45,7 @@ public class AddCollisionBenchmark {
 
     @Setup
     public void setUp() {
-      this.collisionList = Arrays.asList(Collisions.COLLISIONS);
+      this.collisionList = Arrays.asList(Collisions.COLLISIONS2);
     }
 
   }
@@ -54,7 +54,7 @@ public class AddCollisionBenchmark {
   @Benchmark
   public Set<Object> addJcf() {
     Set<Object> set = new HashSet<>();
-    for (String string : Collisions.COLLISIONS) {
+    for (String string : Collisions.COLLISIONS2) {
       set.add(string);
     }
     return set;
@@ -70,7 +70,7 @@ public class AddCollisionBenchmark {
   @Benchmark
   public Set<Object> addGs() {
     Set<Object> set = Sets.mutable.empty();
-    for (String string : Collisions.COLLISIONS) {
+    for (String string : Collisions.COLLISIONS2) {
       set.add(string);
     }
     return set;

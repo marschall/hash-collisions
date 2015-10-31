@@ -49,11 +49,11 @@ public class ContainsCollisionBenchmark {
 
     @Setup
     public void setUp() {
-      List<String> collisionList = Arrays.asList(Collisions.COLLISIONS);
-      this.gsSet = Sets.mutable.with(Collisions.COLLISIONS);
+      List<String> collisionList = Arrays.asList(Collisions.COLLISIONS2);
+      this.gsSet = Sets.mutable.with(Collisions.COLLISIONS2);
       this.jcfSet = new HashSet<>(collisionList);
-      this.first = Collisions.COLLISIONS[0];
-      this.last = Collisions.COLLISIONS[Collisions.COLLISIONS.length - 1];
+      this.first = Collisions.COLLISIONS2[0];
+      this.last = Collisions.COLLISIONS2[Collisions.COLLISIONS2.length - 1];
     }
   }
 

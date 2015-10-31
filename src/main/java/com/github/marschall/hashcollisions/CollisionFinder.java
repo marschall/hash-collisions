@@ -16,8 +16,8 @@ public class CollisionFinder {
   // https://github.com/emboss/schadcode
 
   public static void main(String[] args) {
-//    findByCountOnly();
-    findByhashCode(1216347);
+//    findByCountOnly3();
+    findByhashCode2(1216347);
 //    System.out.printf("%04H%n", 127);
   }
 
@@ -37,7 +37,7 @@ public class CollisionFinder {
     }
   }
 
-  private static void findByhashCode(int hashCode) {
+  private static void findByhashCode2(int hashCode) {
 
     MutableSet<String> collisions = Sets.mutable.empty();
     for (char i = 0; i < Character.MAX_VALUE; i++) {
@@ -56,11 +56,38 @@ public class CollisionFinder {
 
     System.out.println(collisions.size());
     for (String collision : collisions) {
-      System.out.println("\"\\u" + toHex(collision.charAt(0)) +"\\u" + toHex(collision.charAt(0)) + "\",");
+      System.out.println("\"\\u" + toHex(collision.charAt(0)) + "\\u" + toHex(collision.charAt(1)) + "\",");
     }
   }
 
-  private static void findByCountOnly() {
+  private static void findByhashCode3(int hashCode) {
+
+    MutableSet<String> collisions = Sets.mutable.empty();
+    for (char i = 0; i < Character.MAX_VALUE; i++) {
+      if (!Character.isSurrogate(i)) {
+        for (char j = 0; j < Character.MAX_VALUE; j++) {
+          if (!Character.isSurrogate(j)) {
+            for (char k = 0; k < Character.MAX_VALUE; k++) {
+              if (!Character.isSurrogate(k)) {
+                String string = new String(new char[]{(char) i, (char) j, (char) k});
+                if (string.hashCode() == hashCode) {
+                  collisions.add(string);
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    System.out.println(collisions.size());
+    for (String collision : collisions) {
+      System.out.println("\"\\u" + toHex(collision.charAt(0)) + "\\u" + toHex(collision.charAt(1)) + "\\u" + toHex(collision.charAt(2)) + "\",");
+    }
+  }
+
+  private static void findByCountOnly2() {
     MutableIntIntMap counts = IntIntMaps.mutable.empty();
     //IntStream chars = IntStream.rangeClosed(0, Character.MAX_VALUE);
     for (char i = 0; i < Character.MAX_VALUE; i++) {
@@ -71,6 +98,41 @@ public class CollisionFinder {
             int key = string.hashCode();
             int count = counts.getIfAbsent(key, 0);
             counts.put(key, count + 1);
+          }
+        }
+      }
+    }
+
+    int maxCount = 0;
+    int maxHashCode = 0;
+    Iterator<IntIntPair> iterator = counts.keyValuesView().iterator();
+    while (iterator.hasNext()) {
+      IntIntPair pair = iterator.next();
+      int hashCode = pair.getOne();
+      int count = pair.getTwo();
+      if (count > maxCount) {
+        maxCount = count;
+        maxHashCode = hashCode;
+      }
+    }
+    System.out.println("hashCode: " + maxHashCode + " count: " + maxCount);
+  }
+
+  private static void findByCountOnly3() {
+    MutableIntIntMap counts = IntIntMaps.mutable.empty();
+    //IntStream chars = IntStream.rangeClosed(0, Character.MAX_VALUE);
+    for (char i = 0; i < Character.MAX_VALUE; i++) {
+      if (!Character.isSurrogate(i)) {
+        for (char j = 0; j < Character.MAX_VALUE; j++) {
+          if (!Character.isSurrogate(j)) {
+            for (char k = 0; k < Character.MAX_VALUE; k++) {
+              if (!Character.isSurrogate(k)) {
+                String string = new String(new char[]{(char) i, (char) j, (char) k});
+                int key = string.hashCode();
+                int count = counts.getIfAbsent(key, 0);
+                counts.put(key, count + 1);
+              }
+            }
           }
         }
       }
