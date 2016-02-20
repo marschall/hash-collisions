@@ -214,19 +214,19 @@
     <dependency>
       <groupId>com.goldmansachs</groupId>
       <artifactId>gs-collections-api</artifactId>
-      <version>6.1.0</version>
+      <version>7.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>com.goldmansachs</groupId>
       <artifactId>gs-collections</artifactId>
-      <version>6.1.0</version>
+      <version>7.0.1</version>
     </dependency>
 
     <dependency>
       <groupId>com.goldmansachs</groupId>
       <artifactId>gs-collections-testutils</artifactId>
-      <version>6.1.0</version>
+      <version>7.0.1</version>
       <scope>test</scope>
     </dependency>
 
@@ -303,7 +303,7 @@
     <javac.target>1.8</javac.target>
     <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-    <jmh.version>1.11.2</jmh.version>
+    <jmh.version>1.11.3</jmh.version>
     <uberjar.name>benchmarks</uberjar.name>
   </properties>
 
