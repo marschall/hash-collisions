@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.collections.impl.factory.Sets;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -13,8 +14,6 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-
-import com.gs.collections.impl.factory.Sets;
 
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
@@ -49,7 +48,7 @@ public class AddCollisionBenchmark {
   }
 
   @Benchmark
-  public Set<Object> addGs() {
+  public Set<Object> addEclipse() {
     Set<Object> set = Sets.mutable.empty();
     for (String string : Collisions.COLLISIONS2) {
       set.add(string);
@@ -58,7 +57,7 @@ public class AddCollisionBenchmark {
   }
 
   @Benchmark
-  public Set<Object> addAllGs(SetState state) {
+  public Set<Object> addAllEclipse(SetState state) {
     Set<Object> set = Sets.mutable.empty();
     set.addAll(state.collisionList);
     return set;

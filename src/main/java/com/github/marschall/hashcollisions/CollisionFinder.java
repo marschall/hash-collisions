@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.gs.collections.api.map.primitive.MutableIntIntMap;
-import com.gs.collections.api.map.primitive.MutableIntObjectMap;
-import com.gs.collections.api.set.MutableSet;
-import com.gs.collections.api.tuple.primitive.IntIntPair;
-import com.gs.collections.impl.factory.Sets;
-import com.gs.collections.impl.factory.primitive.IntIntMaps;
-import com.gs.collections.impl.factory.primitive.IntObjectMaps;
+import org.eclipse.collections.api.map.primitive.MutableIntIntMap;
+import org.eclipse.collections.api.map.primitive.MutableIntObjectMap;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.primitive.IntIntMaps;
+import org.eclipse.collections.impl.factory.primitive.IntObjectMaps;
 
 public class CollisionFinder {
 

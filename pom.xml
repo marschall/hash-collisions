@@ -212,20 +212,20 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.goldmansachs</groupId>
-      <artifactId>gs-collections-api</artifactId>
+      <groupId>org.eclipse.collections</groupId>
+      <artifactId>eclipse-collections-api</artifactId>
       <version>7.0.1</version>
     </dependency>
 
     <dependency>
-      <groupId>com.goldmansachs</groupId>
-      <artifactId>gs-collections</artifactId>
+      <groupId>org.eclipse.collections</groupId>
+      <artifactId>eclipse-collections</artifactId>
       <version>7.0.1</version>
     </dependency>
 
     <dependency>
-      <groupId>com.goldmansachs</groupId>
-      <artifactId>gs-collections-testutils</artifactId>
+      <groupId>org.eclipse.collections</groupId>
+      <artifactId>eclipse-collections-testutils</artifactId>
       <version>7.0.1</version>
       <scope>test</scope>
     </dependency>

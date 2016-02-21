@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.collections.impl.factory.Sets;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -14,15 +15,13 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
-import com.gs.collections.impl.factory.Sets;
-
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class ContainsCollisionBenchmark {
 
   @State(Scope.Benchmark)
   public static class SetState {
-    Set<String> gsSet;
+    Set<String> eclipseSet;
     Set<String> jcfSet;
     String first;
     String last;
@@ -31,7 +30,7 @@ public class ContainsCollisionBenchmark {
     @Setup
     public void setUp() {
       List<String> collisionList = Arrays.asList(Collisions.COLLISIONS2);
-      this.gsSet = Sets.mutable.with(Collisions.COLLISIONS2);
+      this.eclipseSet = Sets.mutable.with(Collisions.COLLISIONS2);
       this.jcfSet = new HashSet<>(collisionList);
       this.first = Collisions.COLLISIONS2[0];
       this.last = Collisions.COLLISIONS2[Collisions.COLLISIONS2.length - 1];
@@ -49,13 +48,13 @@ public class ContainsCollisionBenchmark {
   }
 
   @Benchmark
-  public boolean containsFirstGs(SetState state) {
-    return state.gsSet.contains(state.first);
+  public boolean containsFirstEclipse(SetState state) {
+    return state.eclipseSet.contains(state.first);
   }
 
   @Benchmark
-  public boolean containsLastGs(SetState state) {
-    return state.gsSet.contains(state.last);
+  public boolean containsLastEclipse(SetState state) {
+    return state.eclipseSet.contains(state.last);
   }
 
 }
